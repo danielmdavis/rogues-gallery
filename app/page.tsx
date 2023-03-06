@@ -21,10 +21,8 @@ export default function Home() {
     })
   }
 
-  if (search.length > 2) { // calls too much
-    if (landlords == {}) {
-      getAll()
-    }
+  if (search.length > 2 && landlords.length === undefined) {
+    getAll()
   }
 
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
