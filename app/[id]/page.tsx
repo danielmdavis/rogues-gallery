@@ -1,29 +1,31 @@
-import { useState } from 'react'
-
+'use client'
 import styles from './../page.module.css'
-import Landlord from './../landlordComponent'
+import { useAppContext } from './../state'
+import Landlord from './expandableLandlordComponent'
 import Property from './propertyComponent'
 
-import output from './../output.json'
-
 export default function LandlordView(context: object) {
-const name = context.params.id.replace(/%20/g, ' ')
-let landlord = output[name][0]
 
-const properties = landlord.map((item) => {
-  return(
-    <Property
-    street={item.MAIL_ADDRESS}
-    city={item.MAIL_CITY_STATE}
-    zip={item.MAIL_ZIP} />
-  )
-})
+  let globalState = useAppContext()
+  let landlord: object[] = globalState.landlord
 
+  // const name = context.params.id.replace(/%20/g, ' ')
+  // let landlord = output[name]
+  let properties = []
+  landlord.forEach((item: object) => {
+    properties.push(
+      <Property
+      street={item.MAIL_ADDRESS}
+      city={item.MAIL_CITY_STATE}
+      zip={item.MAIL_ZIP}
+      key={item.FIELD1} />
+    )
+  })
 
   return (
     <main className={styles.main}>
-      <Landlord name={name} />
-      {properties}
+      <Landlord name={landlord[0]['OWNER_NM']} properties={properties} />
+      
     </main>
   )
 }

@@ -9,8 +9,8 @@ interface PropertyProps {
 
 export default function Property(props: PropertyProps) {
   return (
-    <div style={{ border: '4px solid lime', width: '400px', margin: '10px', padding: '6px', backgroundColor: 'lightskyblue', fontFamily: 'helvetica' }}>
-      <h1 style={{ color: 'darkBlue', textDecoration: 'none' }}>{props.street}, {props.city}</h1>
+    <div className='property'>
+      <h1>{props.street}, {props.city}</h1>
     </div>
   )
 }
