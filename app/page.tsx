@@ -28,15 +28,15 @@ export default function Home() {
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
   
   let lordArray: object[] = []
-  Object.entries(landlords).forEach((item: object) => {
-    // console.log(Object.keys(item[1]))
-    if (search.length > 2 && Object.keys(item[1])?.includes(search)) {
+  Object.entries(landlords)?.forEach((item: object) => {
+    const name = Object.keys(item[1])[0]
+    if (name.includes(search)) {
       lordArray.push(
-        <div onClick={() => setContext(item[1]) }>
+        <div onClick={() => setContext(name) }>
           <Landlord 
-          key={item[0]} 
-          name={item[0]} 
-          properties={landlords[item[1]]} />
+          key={name} 
+          name={name} 
+          properties={landlords[name]} />
         </div>
       )
     }
