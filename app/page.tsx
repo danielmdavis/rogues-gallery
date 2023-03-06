@@ -11,19 +11,18 @@ export default function Home() {
   let [landlords, setGet] = useState({})
   let globalState = useAppContext()
 
-  useLayoutEffect(() => { getAll() }, [])
-
-  let params = { name: search }
-  // const params = {}
-
+  // useLayoutEffect(() => {  }, [])
+  
   const getAll = () => {
-    fetch('http://localhost:5000/?' + new URLSearchParams(params)
+    fetch('http://localhost:5000/?' + new URLSearchParams({ name: search}))
+    .then(req => req.json())
+    .then(res => {
+      setGet(res)
+    })
+  }
 
-        )
-      .then(req => req.json())
-      .then(res => {
-        setGet(res)
-      })
+  if (search.length > 2) {
+    getAll()
   }
 
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
