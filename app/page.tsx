@@ -10,8 +10,6 @@ export default function Home() {
   let [search, setSearch] = useState('')
   let [landlords, setGet] = useState({})
   let globalState = useAppContext()
-
-  // useLayoutEffect(() => {  }, [])
   
   const getAll = () => {
     fetch('http://localhost:5000/?' + new URLSearchParams({ name: search }))
@@ -21,18 +19,18 @@ export default function Home() {
     })
   }
 
-  if (search.length > 2 && landlords.length === undefined) {
-    getAll()
-  }
-
+  if (search.length > 2 && landlords.length === undefined) { getAll() } // all = 3-char param string
+  
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
+
+
   
   let lordArray: object[] = []
   Object.entries(landlords)?.forEach((item: object) => {
-    const name = Object.keys(item[1])[0]
+    const name = item[0]
     if (name.includes(search)) {
       lordArray.push(
-        <div onClick={() => setContext(name) }>
+        <div onClick={ () => setContext(name) }>
           <Landlord 
           key={name} 
           name={name} 

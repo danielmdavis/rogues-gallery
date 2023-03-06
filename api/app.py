@@ -31,7 +31,10 @@ def site_map():
 # @cross_origin(allows_options=["*"], allow_headers=["*"], allow_methods=["*"], allow_origins=["*"])
 def api():
     name = request.args.get("name")
-    matches = [{key: value} for key, value in landlords.items() if name in key]
+    matches = {}
+    for key, value in landlords.items():
+        if name in key:
+            matches[key] = value
     return matches
 
 @app.route("/", methods=["OPTIONS"])

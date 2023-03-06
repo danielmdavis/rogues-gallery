@@ -8,6 +8,7 @@ export default function LandlordView(context: object) {
 
   let globalState = useAppContext()
   let landlord: object[] = globalState.landlord
+  console.log(landlord)
 
   // const name = context.params.id.replace(/%20/g, ' ')
   // let landlord = output[name]
@@ -21,11 +22,9 @@ export default function LandlordView(context: object) {
       key={item.FIELD1} />
     )
   })
-
   return (
     <main className={styles.main}>
       <Landlord name={landlord[0]['OWNER_NM']} properties={properties} />
-      
     </main>
   )
 }
