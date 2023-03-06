@@ -24,12 +24,15 @@ def site_map():
             links.append((url, rule.endpoint))
     return links
 
+
+
+
 @app.route("/", methods=["GET"])
 # @cross_origin(allows_options=["*"], allow_headers=["*"], allow_methods=["*"], allow_origins=["*"])
 def api():
-    print(request.args.get("name"))
-    response = landlords
-    return response
+    name = request.args.get("name")
+    matches = [{key: value} for key, value in landlords.items() if name in key]
+    return matches
 
 @app.route("/", methods=["OPTIONS"])
 @cross_origin(allows_options=["*"], allow_headers=["*"], allow_methods=["*"], allow_origins=["*"])

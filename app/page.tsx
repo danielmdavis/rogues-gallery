@@ -14,28 +14,31 @@ export default function Home() {
   // useLayoutEffect(() => {  }, [])
   
   const getAll = () => {
-    fetch('http://localhost:5000/?' + new URLSearchParams({ name: search}))
+    fetch('http://localhost:5000/?' + new URLSearchParams({ name: search }))
     .then(req => req.json())
     .then(res => {
       setGet(res)
     })
   }
 
-  if (search.length > 2) {
-    getAll()
+  if (search.length > 2) { // calls too much
+    if (landlords == {}) {
+      getAll()
+    }
   }
 
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
   
   let lordArray: object[] = []
   Object.entries(landlords).forEach((item: object) => {
-    if (search.length > 2 && item[0].includes(search)) {
+    // console.log(Object.keys(item[1]))
+    if (search.length > 2 && Object.keys(item[1])?.includes(search)) {
       lordArray.push(
-        <div onClick={() => setContext(item[0]) }>
+        <div onClick={() => setContext(item[1]) }>
           <Landlord 
           key={item[0]} 
           name={item[0]} 
-          properties={landlords[item[0]]} />
+          properties={landlords[item[1]]} />
         </div>
       )
     }
