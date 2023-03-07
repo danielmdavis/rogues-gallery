@@ -20,7 +20,8 @@ export default function LandlordView(context: object) {
     })
   }
 
-  if (!_.isEqual(globalState.landlord, {})) { 
+  if (!_.isEqual(globalState.landlord, {}) && _.isEqual(landlord, [])) { 
+    console.log('foo')
     setLandlord(globalState.landlord )
   } else if (_.isEqual(landlord, [])) {
     getLandlord(name)
