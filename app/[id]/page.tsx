@@ -21,15 +21,12 @@ export default function LandlordView(context: object) {
   }
 
   if (!_.isEqual(globalState.landlord, {}) && _.isEqual(landlord, [])) { 
-    console.log('foo')
     setLandlord(globalState.landlord )
   } else if (_.isEqual(landlord, [])) {
     getLandlord(name)
   }
 
-console.log(landlord)
-
-  let properties = []
+  let properties: object[] = []
   landlord.forEach((item: object) => {
     properties.push(
       <Property

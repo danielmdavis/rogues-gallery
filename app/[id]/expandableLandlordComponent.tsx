@@ -9,10 +9,9 @@ interface LandlordProps {
 
 export default function Landlord(props: LandlordProps) {
 
-
   return (
     <Link href={`/${props.name}`}>
-      <div className='landlord'>
+      <div className='expandable-landlord'>
         <h1>{props.name}</h1>
         {props.properties}
       </div>

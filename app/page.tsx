@@ -12,9 +12,9 @@ export default function Home() {
   let [landlords, setGet] = useState({})
   let globalState = useAppContext()
   
-  const initialChars = 4
+  const initialChars = 3
   
-  const getAll = () => {
+  const getAllMatches = () => {
     fetch('http://localhost:5000/?' + new URLSearchParams({ name: search }))
     .then(req => req.json())
     .then(res => {
@@ -22,7 +22,8 @@ export default function Home() {
     })
   }
 
-  if (search.length >= initialChars && _.isEqual(landlords, {})) { getAll() } // all = n-char initial param string
+  if (search.length >= initialChars && _.isEqual(landlords, {})) { getAllMatches() } // blocks rerunning
+  if (search.length < initialChars && !_.isEqual(landlords, {})) { setGet({}) } // resets conditions to unblock rerunning
   
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
 
@@ -37,8 +38,6 @@ export default function Home() {
   let lordArray: object[] = []
   Object.entries(landlords)?.forEach((item: object) => {
     const name = item[0]
-    // console.log(name)
-    // console.log(searchMatcher(name))
     if (searchMatcher(name)) {
       lordArray.push(
         <div onClick={ () => setContext(name) }>
@@ -51,6 +50,7 @@ export default function Home() {
     }
   })
   let show = search.length >= initialChars ? 'show' : 'hide'
+  let antishow = search.length >= initialChars ? 'hide': 'show'
     
   return (
     <main className={styles.main}>
@@ -59,7 +59,8 @@ export default function Home() {
         type='text'
         value={search}
         onChange={(e) => { setSearch(e.target.value.toUpperCase()) }} />
-      <div className={show}>{lordArray?.length} matches out of {Object.keys(landlords).length} landlords</div>
+        <div className={antishow}>Search a landlord</div>
+      <div className={show}>{lordArray?.length} matches out of 40382 landlords</div>
       {lordArray}
     </main>
   )
