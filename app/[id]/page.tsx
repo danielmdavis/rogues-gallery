@@ -1,4 +1,6 @@
 'use client'
+const _ = require('lodash')
+import { useState } from 'react'
 import styles from './../page.module.css'
 import { useAppContext } from './../state'
 import Landlord from './expandableLandlordComponent'
@@ -7,11 +9,25 @@ import Property from './propertyComponent'
 export default function LandlordView(context: object) {
 
   let globalState = useAppContext()
-  let landlord: object[] = globalState.landlord
-  console.log(landlord)
+  let [landlord, setLandlord] = useState([])
+  const name = context.params.id.replace(/%20/g, ' ')
 
-  // const name = context.params.id.replace(/%20/g, ' ')
-  // let landlord = output[name]
+  const getLandlord = (str: string) => {
+    fetch('http://localhost:5000/?' + new URLSearchParams({ name: str }))
+    .then(req => req.json())
+    .then(res => { 
+      setLandlord(res[name])
+    })
+  }
+
+  if (!_.isEqual(globalState.landlord, {})) { 
+    setLandlord(globalState.landlord )
+  } else if (_.isEqual(landlord, [])) {
+    getLandlord(name)
+  }
+
+console.log(landlord)
+
   let properties = []
   landlord.forEach((item: object) => {
     properties.push(
@@ -24,7 +40,7 @@ export default function LandlordView(context: object) {
   })
   return (
     <main className={styles.main}>
-      <Landlord name={landlord[0]['OWNER_NM']} properties={properties} />
+      <Landlord name={name} properties={properties} />
     </main>
   )
 }
