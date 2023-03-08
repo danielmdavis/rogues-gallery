@@ -25,19 +25,6 @@ body {
   margin: 6px;
 }
 
-input:focus, textarea, select {
-  background-color: var(--white);
-  border: none;
-  overflow: auto;
-  outline: none !important;
-  border: 4px solid var(--red);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  font-weight: 600;
-}
-
-
 .header {
   display: flex;
   justify-content: center;
@@ -61,10 +48,10 @@ input:focus, textarea, select {
 .landlord {
   width: 500px;
   background-color: var(--white);
-  color: var(--black) !important;
+  color: var(--black);
   font-size: 1.25em;
   font-weight: 600;
-  transition: 0.25s;
+  transition: 0.125s;
 }
 .landlord:hover {
   background-color: var(--red);
@@ -97,16 +84,37 @@ input:focus, textarea, select {
   font-size: 1.5em;
   background-color: var(--black);
   color: var(--white);
+  margin-top: -30px;
 }
 
-.searchbox {
-color: var(--black);
-background-color: var(--black);
-border-radius: 8px;
-border: 4px solid rgb(206, 26, 98);
-padding: 2px;
-margin-top: -30px;
-margin-bottom: 2px;
+input {
+  caret-color: var(--black);
+}
+input:focus, textarea, select {
+  background-color: var(--white);
+  border: none;
+  overflow: auto;
+  outline: none !important;
+  border: 4px solid var(--red);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.searchbox-full, .searchbox-empty {
+  color: var(--black);
+  border-radius: 8px;
+  border: 4px solid rgb(206, 26, 98);
+  padding: 2px;
+  margin-top: -30px;
+  margin-bottom: 2px;
+  width: 200px;
+  font-weight: 600;
+}
+.searchbox-empty {
+  background-color: var(--black);
+}
+.searchbox-full {
+  background-color: var(--white);
 }
 .show, .hide {
   font-weight: 200;

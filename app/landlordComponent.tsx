@@ -2,8 +2,8 @@ import Link from 'next/link'
 import './page.module.css'
 
 interface LandlordProps {
-  name?: string
-  properties?: object[]
+  name: string
+  properties: object[]
 }
 
 export default function Landlord(props: LandlordProps) {

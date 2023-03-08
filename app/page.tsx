@@ -28,7 +28,7 @@ export default function Home() {
   
   const setContext = (name: string) => { globalState.landlord = landlords[name] }
 
-  const searchMatcher = (name: string) => {
+  const searchMatcher = (name: string) => { // simple fuzzy matching
     const searchArr = search.split(' ')
     for (const term of searchArr) {
       if (!name.includes(term)) { return false }
@@ -43,20 +43,21 @@ export default function Home() {
       lordArray.push(
         <div onClick={ () => setContext(name) }>
           <Landlord 
-          key={name} 
-          name={name} 
-          properties={landlords[name]} />
+            key={name} 
+            name={name} 
+            properties={landlords[name]} />
         </div>
       )
     }
   })
-  let show = search.length >= initialChars ? 'show' : 'hide'
-  let antishow = search.length >= initialChars ? 'hide': 'show'
+  const show = search.length >= initialChars ? 'show' : 'hide'
+  const antishow = search.length >= initialChars ? 'hide': 'show'
+  const boxFill = search.length > 0 ? 'searchbox-full' : 'searchbox-empty'
     
   return (
     <main className={styles.main}>
       <input
-        className='searchbox'
+        className={boxFill}
         type='text'
         value={search}
         onChange={(e) => { setSearch(e.target.value.toUpperCase()) }} />

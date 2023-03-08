@@ -21,10 +21,21 @@ export default function LandlordView(context: object) {
     })
   }
 
-  if (!_.isEqual(globalState.landlord, {}) && _.isEqual(landlord, [])) { 
+  // checks whether global state has provided the data, else gets it from api call
+  if (!_.isEqual(globalState.landlord, {}) && _.isEqual(landlord, [])) {
     setLandlord(globalState.landlord )
   } else if (_.isEqual(landlord, [])) {
     getLandlord(name)
+  }
+
+  const exportLandlord = () => {
+    console.log('foo')
+    // const file = new Blob([JSON.stringify(landlord)], { type: 'text/plain' })
+    // const link = document.createElement('a')
+    // link.download = `bug.txt`
+    // link.href = URL.createObjectURL(file)
+    // console.log(link)
+    // link.click()
   }
 
   let properties: object[] = []
@@ -41,8 +52,8 @@ export default function LandlordView(context: object) {
     <main className={styles.main}>
       <LandlordBox name={name} properties={properties} />
       <div className='button-box'>
-        <Button name='COPY' />
-        <Button name='PDF' />
+        <Button name='COPY' onClick={ () => { console.log(name) } } />
+        <Button name='PDF' onClick={exportLandlord} />
       </div>
     </main>
   )
