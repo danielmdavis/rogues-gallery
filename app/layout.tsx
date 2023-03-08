@@ -10,7 +10,10 @@ export default function RootLayout({
     <html lang="en">
       <AppWrapper>
         <head />
-        <body>{children}</body>
+        <body>
+          <div className='header'><div className='header-inner'>Rogues Gallery</div></div>
+          {children}
+        </body>
       </AppWrapper>
     </html>
   )

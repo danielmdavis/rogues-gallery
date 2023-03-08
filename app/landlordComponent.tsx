@@ -8,12 +8,10 @@ interface LandlordProps {
 
 export default function Landlord(props: LandlordProps) {
 
-
   return (
     <Link href={`/${props.name}`}>
       <div className='landlord'>
-        <h1>{props.name}</h1> 
-        <span>({props.properties.length})</span>
+        <h1>{props.name} <span style={{ fontSize: '0.666em' }}>[{props.properties.length}]</span></h1>
       </div>
     </Link>
   )

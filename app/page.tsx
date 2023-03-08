@@ -5,6 +5,7 @@ import { useAppContext } from './state'
 
 import styles from './page.module.css'
 import Landlord from './landlordComponent'
+import Button from './buttonComponent'
 
 export default function Home() {
 

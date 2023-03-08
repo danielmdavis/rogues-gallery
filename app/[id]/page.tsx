@@ -3,8 +3,9 @@ const _ = require('lodash')
 import { useState } from 'react'
 import styles from './../page.module.css'
 import { useAppContext } from './../state'
-import Landlord from './expandableLandlordComponent'
+import LandlordBox from './expandableLandlordComponent'
 import Property from './propertyComponent'
+import Button from '../buttonComponent'
 
 export default function LandlordView(context: object) {
 
@@ -38,7 +39,11 @@ export default function LandlordView(context: object) {
   })
   return (
     <main className={styles.main}>
-      <Landlord name={name} properties={properties} />
+      <LandlordBox name={name} properties={properties} />
+      <div className='button-box'>
+        <Button name='COPY' />
+        <Button name='PDF' />
+      </div>
     </main>
   )
 }
