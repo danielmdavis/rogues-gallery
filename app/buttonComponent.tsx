@@ -9,10 +9,8 @@ interface ButtonProps {
 export default function Landlord(props: LandlordProps) {
 
   return (
-    <Link href={``}>
-      <div className='button'>
+      <button className='button'>
         <div>{props.name}</div>
-      </div>
-    </Link>
+      </button>
   )
 }

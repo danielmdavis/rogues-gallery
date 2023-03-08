@@ -61,7 +61,7 @@ export default function Home() {
         type='text'
         value={search}
         onChange={(e) => { setSearch(e.target.value.toUpperCase()) }} />
-        <div className={antishow}>Search a landlord</div>
+      <div className={antishow}>Search a landlord</div>
       <div className={show}>{lordArray?.length} matches out of 40382 landlords</div>
       {lordArray}
     </main>

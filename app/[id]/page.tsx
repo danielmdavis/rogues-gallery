@@ -6,6 +6,7 @@ import { useAppContext } from './../state'
 import LandlordBox from './expandableLandlordComponent'
 import Property from './propertyComponent'
 import Button from '../buttonComponent'
+import { blob } from 'stream/consumers'
 
 export default function LandlordView(context: object) {
 
@@ -28,14 +29,20 @@ export default function LandlordView(context: object) {
     getLandlord(name)
   }
 
+  const blobConstructor = () => {
+    let string = `${name}\r\n\r\n`
+    landlord.forEach((item: object) => {
+      string += `${item.MAIL_ADDRESS}\r\n`
+      string += `${item.MAIL_CITY_STATE} ${item.MAIL_ZIP.slice(0, -1)}\r\n\r\n`
+    })
+    return string
+  }
   const exportLandlord = () => {
-    console.log('foo')
-    // const file = new Blob([JSON.stringify(landlord)], { type: 'text/plain' })
-    // const link = document.createElement('a')
-    // link.download = `bug.txt`
-    // link.href = URL.createObjectURL(file)
-    // console.log(link)
-    // link.click()
+    const file = new Blob([blobConstructor()], { type: 'text/plain', endings: 'native' })
+    const link = document.createElement('a')
+    link.download = `${name}.txt`
+    link.href = URL.createObjectURL(file)
+    link.click()
   }
 
   let properties: object[] = []
@@ -52,8 +59,8 @@ export default function LandlordView(context: object) {
     <main className={styles.main}>
       <LandlordBox name={name} properties={properties} />
       <div className='button-box'>
-        <Button name='COPY' onClick={ () => { console.log(name) } } />
-        <Button name='PDF' onClick={exportLandlord} />
+        <div><Button name='copy' /></div>
+        <div onClick={exportLandlord}><Button name='save' /></div>
       </div>
     </main>
   )
