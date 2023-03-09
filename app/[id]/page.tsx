@@ -12,6 +12,7 @@ export default function LandlordView(context: object) {
 
   let globalState = useAppContext()
   let [landlord, setLandlord] = useState([])
+  let [violations, setViolations] = useState({})
   const name = context.params.id.replace(/%20/g, ' ')
 
   const getLandlord = (str: string) => {
@@ -22,6 +23,21 @@ export default function LandlordView(context: object) {
     })
   }
 
+  const getViolations = (streetAddress: string, city: string) => {
+    const address = streetAddress + ' ' + city
+    fetch('https://data.boston.gov/api/3/action/datastore_search?resource_id=800a2663-1d6a-46e7-9356-bedb70f5332c&q=' + address)
+    .then(req => req.json())
+    .then(res => {
+      const records = res.result.records
+      const key = records[0]['contact_addr2']
+      if (!violations[key]) {
+        violations[key] = records
+        setViolations(violations)
+      }
+    })
+  }
+
+
   // checks whether global state has provided the data, else gets it from api call
   if (!_.isEqual(globalState.landlord, {}) && _.isEqual(landlord, [])) {
     setLandlord(globalState.landlord )
@@ -29,6 +45,7 @@ export default function LandlordView(context: object) {
     getLandlord(name)
   }
 
+  // builds file contents for download // downloads
   const blobConstructor = () => {
     let string = `${name}\r\n\r\n`
     landlord.forEach((item: object) => {
@@ -47,6 +64,8 @@ export default function LandlordView(context: object) {
 
   let properties: object[] = []
   landlord.forEach((item: object) => {
+    getViolations(item.MAIL_ADDRESS, item.MAIL_CITY_STATE)
+    console.log(violations)
     properties.push(
       <Property
       street={item.MAIL_ADDRESS}

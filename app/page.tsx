@@ -13,7 +13,7 @@ export default function Home() {
   let [landlords, setGet] = useState({})
   let globalState = useAppContext()
   
-  const initialChars = 3
+  const initialChars = 4
   
   const getAllMatches = () => {
     fetch('http://localhost:5000/?' + new URLSearchParams({ name: search }))
