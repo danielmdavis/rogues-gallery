@@ -29,11 +29,11 @@ export default function LandlordView(context: object) {
     .then(req => req.json())
     .then(res => {
       const records = res.result.records
-      const key = records[0]['contact_addr2']
-      if (!violations[key]) {
-        violations[key] = records
-        setViolations(violations)
-      }
+        const key = records[0]['contact_addr2']
+        if (!violations[key]) {
+          violations[key] = records
+          setViolations(violations)
+        }
     })
   }
 
@@ -65,12 +65,13 @@ export default function LandlordView(context: object) {
   let properties: object[] = []
   landlord.forEach((item: object) => {
     getViolations(item.MAIL_ADDRESS, item.MAIL_CITY_STATE)
-    console.log(violations)
+    const records = violations[item.MAIL_ADDRESS.toLowerCase()]
     properties.push(
       <Property
       street={item.MAIL_ADDRESS}
       city={item.MAIL_CITY_STATE}
       zip={item.MAIL_ZIP}
+      violations={records}
       key={item.FIELD1} />
     )
   })

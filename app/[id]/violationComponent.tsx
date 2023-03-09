@@ -1,16 +1,14 @@
 import Link from 'next/link'
 import './../page.module.css'
 
-interface PropertyProps {
-  street?: string,
-  city?: string,
-  zip?: string
+interface ViolationProps {
+  description: string
 }
 
-export default function Property(props: PropertyProps) {
+export default function Violation(props: ViolationProps) {
   return (
-    <div className='property'>
-      <h1>{props.street}, {props.city}</h1>
+    <div className='violation'>
+      <div>{props.description}</div>
     </div>
   )
 }
