@@ -3,7 +3,8 @@ import './../page.module.css'
 
 interface ViolationProps {
   date: string,
-  description: string
+  description: string,
+  status: string
 }
 
 export default function Violation(props: ViolationProps) {
@@ -15,7 +16,11 @@ export default function Violation(props: ViolationProps) {
 
   return (
     <div className='violation'>
-      <div><span style={{ fontSize: '0.75em' }}>[{date}]:</span> {props.description}</div>
+      <div>
+        {props.description} 
+        <span style={{ fontSize: '0.75em' }}> [{date}] </span> 
+        <span style={{ fontSize: '0.9em' }}> [{props.status}]</span>
+        </div>
     </div>
   )
 }

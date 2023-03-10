@@ -29,8 +29,7 @@ export default function Property(props: PropertyProps) {
   console.log(violations)
   let violation
   if (violations.length > 0) {
-
-    violation = <Violation description={violations[0].description} date={violations[0].status_dttm} />
+    violation = <Violation description={violations[0].description} date={violations[0].status_dttm} status={violations[0].status} />
   }
   return (
     <div className='property'>
