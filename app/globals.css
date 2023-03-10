@@ -63,13 +63,17 @@ body {
   color: var(--black) !important;
   font-size: 0.75em;
   font-weight: 400 !important;
+  padding-bottom: 0px !important;
 }
 .violation {
+  height: 32px;
   width: 392.75px;
   background-color: var(--black);
   color: var(--white) !important;
-  font-size: 0.75em;
+  font-size: 0.85em;
   font-weight: 400 !important;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 .landlord, .property, .expandable-landlord {

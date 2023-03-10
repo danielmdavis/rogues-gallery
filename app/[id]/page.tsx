@@ -28,8 +28,8 @@ export default function LandlordView(context: object) {
     fetch('https://data.boston.gov/api/3/action/datastore_search?resource_id=800a2663-1d6a-46e7-9356-bedb70f5332c&q=' + address)
     .then(req => req.json())
     .then(res => {
-      const records = res.result.records
-        const key = records[0]['contact_addr2']
+        const records = res.result.records
+        const key = records[0]['violation_stno'] + ' ' + records[0]['violation_street'].toLowerCase() + ' ' + records[0]['violation_suffix'].toLowerCase()
         if (!violations[key]) {
           violations[key] = records
           setViolations(violations)

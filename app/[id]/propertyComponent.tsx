@@ -12,9 +12,8 @@ interface PropertyProps {
 export default function Property(props: PropertyProps) {
 
   let violation
-  if (props.violations) {
-    violation = <Violation description={props.violations[0].description} />
-    console.log(violation)
+  if (props.violations) { 
+    violation = <Violation description={props.violations[0].description} date={props.violations[0].status_dttm} /> 
   } 
   return (
     <div className='property'>
