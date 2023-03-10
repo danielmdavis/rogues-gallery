@@ -37,7 +37,6 @@ export default function LandlordView(context: object) {
     })
   }
 
-
   // checks whether global state has provided the data, else gets it from api call
   if (!_.isEqual(globalState.landlord, {}) && _.isEqual(landlord, [])) {
     setLandlord(globalState.landlord )
@@ -64,14 +63,14 @@ export default function LandlordView(context: object) {
 
   let properties: object[] = []
   landlord.forEach((item: object) => {
-    getViolations(item.MAIL_ADDRESS, item.MAIL_CITY_STATE)
-    const records = violations[item.MAIL_ADDRESS.toLowerCase()]
+    // getViolations(item.MAIL_ADDRESS, item.MAIL_CITY_STATE)
+    // const records = violations[item.MAIL_ADDRESS.toLowerCase()]
     properties.push(
       <Property
       street={item.MAIL_ADDRESS}
       city={item.MAIL_CITY_STATE}
       zip={item.MAIL_ZIP}
-      violations={records}
+      // violations={violations[item.MAIL_ADDRESS.toLowerCase()]}
       key={item.FIELD1} />
     )
   })
